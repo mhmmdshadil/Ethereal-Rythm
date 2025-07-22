@@ -41,6 +41,8 @@
       border-radius: 16px;
       overflow: hidden;
       box-sizing: border-box;
+      text-align: center;
+      padding: 1rem;
     }
     .music-card:hover {
       transform: translateY(-8px);
@@ -50,10 +52,11 @@
       background: linear-gradient(45deg, #8B4513, #A0522D);
       transition: all 0.4s ease;
       border-radius: 50px;
-      padding: 12px 24px;
+      padding: 0.75rem 1.5rem;
       position: relative;
       overflow: hidden;
       box-shadow: 0 6px 16px rgba(139, 69, 19, 0.5);
+      font-size: 0.875rem;
     }
     .cta-button:hover {
       background: linear-gradient(45deg, #A0522D, #8B4513);
@@ -147,7 +150,7 @@
       color: transparent;
       font-weight: 600;
     }
-    .social-icon, .sound-icon {
+    .social-icon {
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -158,11 +161,11 @@
       transition: transform 0.3s ease, background 0.3s ease;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3), inset 0 1px 1px rgba(232, 213, 185, 0.1);
     }
-    .social-icon:hover, .sound-icon:hover {
+    .social-icon:hover {
       background: #A0522D;
       transform: scale(1.1);
     }
-    .social-icon svg, .sound-icon svg {
+    .social-icon svg {
       width: 20px;
       height: 20px;
       fill: #E8D5B9;
@@ -198,6 +201,23 @@
       }
       p {
         font-size: 1rem;
+      }
+      .music-card {
+        padding: 0.75rem;
+      }
+      .cta-button {
+        padding: 0.5rem 1rem;
+        font-size: 0.75rem;
+      }
+      .song-title {
+        font-size: 1.25rem;
+      }
+      .player-controls {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      .progress-bar {
+        width: 100%;
       }
     }
     .progress-bar {
@@ -255,12 +275,6 @@
               <div class="progress-bar-fill" id="progress-1"></div>
             </div>
             <span class="timer" id="duration-1">0:00</span>
-            <span class="sound-icon" aria-label="Volume control icon">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                <path d="M11.5 3.5v17l-7-3.5V6.5l7-3.5zm-1 1.7l-4.5 2.3v7l4.5 2.3v-11.6zm5.5 2.8c2.2 0 4 1.8 4 4s-1.8 4-4 4v-2c1.1 0 2-.9 2-2s-.9-2-2-2v-2zm4-3v2c2.2 0 4 1.8 4 4s-1.8 4-4 4v2c3.3 0 6-2.7 6-6s-2.7-6-6-6z"/>
-              </svg>
-            </span>
-            <input type="range" class="volume-slider" value="1" min="0" max="1" step="0.01" aria-label="Volume control for nasheed 1">
           </div>
         </div>
         <!-- Nasheed 2 -->
@@ -275,12 +289,6 @@
               <div class="progress-bar-fill" id="progress-2"></div>
             </div>
             <span class="timer" id="duration-2">0:00</span>
-            <span class="sound-icon" aria-label="Volume control icon">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                <path d="M11.5 3.5v17l-7-3.5V6.5l7-3.5zm-1 1.7l-4.5 2.3v7l4.5 2.3v-11.6zm5.5 2.8c2.2 0 4 1.8 4 4s-1.8 4-4 4v-2c1.1 0 2-.9 2-2s-.9-2-2-2v-2zm4-3v2c2.2 0 4 1.8 4 4s-1.8 4-4 4v2c3.3 0 6-2.7 6-6s-2.7-6-6-6z"/>
-              </svg>
-            </span>
-            <input type="range" class="volume-slider" value="1" min="0" max="1" step="0.01" aria-label="Volume control for nasheed 2">
           </div>
         </div>
       </div>
@@ -338,7 +346,6 @@
         const audio = document.getElementById(player.querySelector('.play-pause').dataset.audio);
         const playPauseBtn = player.querySelector('.play-pause');
         const progressBar = player.querySelector('.progress-bar-fill');
-        const volumeSlider = player.querySelector('.volume-slider');
         const currentTimeDisplay = player.querySelector('.timer[id^="current-time"]');
         const durationDisplay = player.querySelector('.timer[id^="duration"]');
 
@@ -373,10 +380,6 @@
           const progress = (audio.currentTime / audio.duration) * 100;
           progressBar.style.width = `${progress}%`;
           currentTimeDisplay.textContent = formatTime(audio.currentTime);
-        });
-
-        volumeSlider.addEventListener('input', () => {
-          audio.volume = volumeSlider.value;
         });
 
         audio.addEventListener('ended', () => {
