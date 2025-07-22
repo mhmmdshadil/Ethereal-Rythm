@@ -10,7 +10,7 @@
   <meta property="og:description" content="Discover and listen to soulful nasheeds on Ethereal Rythms.">
   <title>Ethereal Rythms</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,800;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,800;0,900;1,400&display=swap" rel="stylesheet">
   <style>
     body {
       background: linear-gradient(135deg, #3C2F2F 0%, #6B4E31 50%, #2A1E1E 100%);
@@ -35,7 +35,7 @@
     }
     .music-card {
       transition: transform 0.5s ease, box-shadow 0.5s ease;
-      background: rgba(74, 55, 40, 0.4);
+      background: rgba(44, 33, 24, 0.7);
       backdrop-filter: blur(12px);
       border: 1px solid #6B4E31;
       border-radius: 16px;
@@ -43,28 +43,8 @@
       box-sizing: border-box;
     }
     .music-card:hover {
-      transform: translateY(-12px);
-      box-shadow: 0 16px 32px rgba(107, 78, 49, 0.4);
-    }
-    .music-card::before {
-      content: '';
-      position: absolute;
-      top: -100%;
-      left: -100%;
-      width: 300%;
-      height: 300%;
-      background: linear-gradient(
-        45deg,
-        transparent,
-        rgba(139, 69, 19, 0.3),
-        transparent
-      );
-      transform: rotate(45deg);
-      animation: shine 6s ease-in-out infinite;
-    }
-    @keyframes shine {
-      0% { transform: translate(-100%, -100%) rotate(45deg); }
-      100% { transform: translate(100%, 100%) rotate(45deg); }
+      transform: translateY(-8px);
+      box-shadow: 0 12px 24px rgba(107, 78, 49, 0.5);
     }
     .cta-button {
       background: linear-gradient(45deg, #8B4513, #A0522D);
@@ -73,12 +53,12 @@
       padding: 12px 24px;
       position: relative;
       overflow: hidden;
-      box-shadow: 0 4px 12px rgba(139, 69, 19, 0.3);
+      box-shadow: 0 6px 16px rgba(139, 69, 19, 0.5);
     }
     .cta-button:hover {
       background: linear-gradient(45deg, #A0522D, #8B4513);
-      transform: scale(1.1);
-      box-shadow: 0 8px 20px rgba(139, 69, 19, 0.5);
+      transform: scale(1.05);
+      box-shadow: 0 10px 20px rgba(139, 69, 19, 0.6);
     }
     .cta-button:focus {
       outline: 2px solid #A0522D;
@@ -100,6 +80,10 @@
       transform: rotate(45deg);
       animation: shine 4s ease-in-out infinite;
     }
+    @keyframes shine {
+      0% { transform: translate(-100%, -100%) rotate(45deg); }
+      100% { transform: translate(100%, 100%) rotate(45deg); }
+    }
     .header-bg {
       position: relative;
       z-index: 1;
@@ -117,7 +101,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: linear-gradient(180deg, rgba(60, 47, 47, 0.8), rgba(42, 30, 30, 0.9));
+      background: linear-gradient(180deg, rgba(50, 37, 37, 0.85), rgba(30, 22, 22, 0.95));
       z-index: -1;
     }
     .header-bg::after {
@@ -138,22 +122,23 @@
       100% { background-position: 0% 50%; }
     }
     .glass-effect {
-      background: rgba(74, 55, 40, 0.4);
+      background: rgba(44, 33, 24, 0.7);
       backdrop-filter: blur(12px);
       border: 1px solid rgba(107, 78, 49, 0.3);
       border-radius: 16px;
       transition: all 0.4s ease;
     }
     .glass-effect:hover {
-      background: rgba(74, 55, 40, 0.5);
-      box-shadow: 0 8px 24px rgba(107, 78, 49, 0.2);
+      background: rgba(44, 33, 24, 0.8);
+      box-shadow: 0 8px 24px rgba(107, 78, 49, 0.3);
     }
     .highlight-text {
       background: linear-gradient(90deg, #E8D5B9, #A0522D);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
-      font-weight: 800;
+      font-weight: 900;
+      letter-spacing: -0.025em;
     }
     .song-title {
       background: linear-gradient(90deg, #E8D5B9, #D4A017);
@@ -199,6 +184,11 @@
         max-width: 768px;
       }
     }
+    @media (min-width: 1024px) {
+      .container {
+        max-width: 900px;
+      }
+    }
     @media (max-width: 576px) {
       .header-bg {
         min-height: 50vh;
@@ -211,13 +201,13 @@
       }
     }
     .progress-bar {
-      background: #6B4E31;
+      background: #4A3728;
       height: 4px;
       border-radius: 2px;
       overflow: hidden;
     }
     .progress-bar-fill {
-      background: #A0522D;
+      background: #D4A017;
       height: 100%;
       width: 0;
       transition: width 0.1s linear;
@@ -227,13 +217,19 @@
       align-items: center;
       gap: 1rem;
     }
+    .timer {
+      font-size: 0.875rem;
+      color: #E8D5B9;
+      min-width: 60px;
+      text-align: center;
+    }
   </style>
 </head>
 <body>
   <!-- Header Section -->
   <header class="header-bg py-16 md:py-24 shadow-2xl">
     <div class="container mx-auto text-center flex flex-col items-center px-6">
-      <h1 class="text-5xl md:text-6xl font-extrabold tracking-tight drop-shadow-2xl fade-in" style="animation-delay: 0.3s;">
+      <h1 class="text-5xl md:text-6xl font-black tracking-tight drop-shadow-2xl fade-in" style="animation-delay: 0.3s;">
         <span class="highlight-text">Ethereal Rythms</span>
       </h1>
       <p class="mt-6 text-xl md:text-2xl font-semibold fade-in" style="animation-delay: 0.5s;">
@@ -254,9 +250,11 @@
           <audio id="audio-1" src="https://github.com/mhmmdshadil/Ethereal-Rythm/raw/main/%D8%A7%D9%84%D9%86%D8%A8%D8%B1%D8%A7%D8%B3%204%20__%20%D8%B9%D8%A8%D8%AF%D8%A7%D9%84%D9%84%D9%87%20%D8%A7%D9%84%D8%AC%D8%A7%D8%B1%D8%A7%D9%84%D9%84%D9%87%20_%20%D9%85%D8%A4%D8%AB%D8%B1%D8%A7%D8%AA.mp3"></audio>
           <div class="player-controls">
             <button class="cta-button play-pause" data-audio="audio-1" aria-label="Play or pause nasheed 1">Play</button>
+            <span class="timer" id="current-time-1">0:00</span>
             <div class="progress-bar flex-1">
               <div class="progress-bar-fill" id="progress-1"></div>
             </div>
+            <span class="timer" id="duration-1">0:00</span>
             <span class="sound-icon" aria-label="Volume control icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                 <path d="M11.5 3.5v17l-7-3.5V6.5l7-3.5zm-1 1.7l-4.5 2.3v7l4.5 2.3v-11.6zm5.5 2.8c2.2 0 4 1.8 4 4s-1.8 4-4 4v-2c1.1 0 2-.9 2-2s-.9-2-2-2v-2zm4-3v2c2.2 0 4 1.8 4 4s-1.8 4-4 4v2c3.3 0 6-2.7 6-6s-2.7-6-6-6z"/>
@@ -272,9 +270,11 @@
           <audio id="audio-2" src="https://github.com/mhmmdshadil/Ethereal-Rythm/raw/main/%D8%A7%D9%84%D9%86%D8%A8%D8%B1%D8%A7%D8%B3%203%20__%20%D8%B9%D8%A8%D8%AF%D8%A7%D9%84%D9%84%D9%87%20%D8%A7%D9%84%D8%B1%D9%81%D8%A7%D8%B9%D9%8A%20_%20%D9%85%D8%A4%D8%AB%D8%B1%D8%A7%D8%AA.mp3"></audio>
           <div class="player-controls">
             <button class="cta-button play-pause" data-audio="audio-2" aria-label="Play or pause nasheed 2">Play</button>
+            <span class="timer" id="current-time-2">0:00</span>
             <div class="progress-bar flex-1">
               <div class="progress-bar-fill" id="progress-2"></div>
             </div>
+            <span class="timer" id="duration-2">0:00</span>
             <span class="sound-icon" aria-label="Volume control icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                 <path d="M11.5 3.5v17l-7-3.5V6.5l7-3.5zm-1 1.7l-4.5 2.3v7l4.5 2.3v-11.6zm5.5 2.8c2.2 0 4 1.8 4 4s-1.8 4-4 4v-2c1.1 0 2-.9 2-2s-.9-2-2-2v-2zm4-3v2c2.2 0 4 1.8 4 4s-1.8 4-4 4v2c3.3 0 6-2.7 6-6s-2.7-6-6-6z"/>
@@ -288,7 +288,7 @@
   </section>
 
   <!-- Footer -->
-  <footer class="bg-gradient-to-r from-[#3C2F2F] to-[#2A1E1E] text-[#E8D5B9] py-10">
+  <footer class="bg-gradient-to-r from-[#3C2F2F] to-[#2A1E1E] text-[#E8D5B9] py-12 border-t border-[#6B4E31]">
     <div class="container mx-auto text-center">
       <p>© 2025 Ethereal Rythms. All rights reserved.</p>
     </div>
@@ -311,11 +311,23 @@
       const players = document.querySelectorAll('.player-controls');
       let currentAudio = null;
 
+      function formatTime(seconds) {
+        const minutes = Math.floor(seconds / 60);
+        const secs = Math.floor(seconds % 60);
+        return `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
+      }
+
       players.forEach(player => {
         const audio = document.getElementById(player.querySelector('.play-pause').dataset.audio);
         const playPauseBtn = player.querySelector('.play-pause');
         const progressBar = player.querySelector('.progress-bar-fill');
         const volumeSlider = player.querySelector('.volume-slider');
+        const currentTimeDisplay = player.querySelector('.timer[id^="current-time"]');
+        const durationDisplay = player.querySelector('.timer[id^="duration"]');
+
+        audio.addEventListener('loadedmetadata', () => {
+          durationDisplay.textContent = formatTime(audio.duration);
+        });
 
         playPauseBtn.addEventListener('click', () => {
           if (currentAudio && currentAudio !== audio) {
@@ -323,6 +335,10 @@
             currentAudio.currentTime = 0;
             const prevBtn = document.querySelector(`[data-audio="${currentAudio.id}"]`);
             prevBtn.textContent = 'Play';
+            const prevProgress = document.querySelector(`#progress-${currentAudio.id.split('-')[1]}`);
+            prevProgress.style.width = '0%';
+            const prevTime = document.querySelector(`#current-time-${currentAudio.id.split('-')[1]}`);
+            prevTime.textContent = '0:00';
           }
 
           if (audio.paused) {
@@ -339,6 +355,7 @@
         audio.addEventListener('timeupdate', () => {
           const progress = (audio.currentTime / audio.duration) * 100;
           progressBar.style.width = `${progress}%`;
+          currentTimeDisplay.textContent = formatTime(audio.currentTime);
         });
 
         volumeSlider.addEventListener('input', () => {
@@ -348,6 +365,7 @@
         audio.addEventListener('ended', () => {
           playPauseBtn.textContent = 'Play';
           progressBar.style.width = '0%';
+          currentTimeDisplay.textContent = '0:00';
           currentAudio = null;
         });
       });
