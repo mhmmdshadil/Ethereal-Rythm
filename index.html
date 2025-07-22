@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <meta name="description" content="Ethereal Rythms - Listen to soulful nasheeds with a modern audio player experience.">
+  <meta name="keywords" content="Ethereal Rythms, nasheeds, Islamic music, audio player">
+  <meta property="og:title" content="Ethereal Rythms">
+  <meta property="og:image" content="https://raw.githubusercontent.com/mhmmdshadil/muhammed-shadil/main/images/profile.jpg.jpg">
+  <meta property="og:description" content="Discover and listen to soulful nasheeds on Ethereal Rythms.">
+  <title>Ethereal Rythms</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,800;1,400&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background: linear-gradient(135deg, #3C2F2F 0%, #6B4E31 50%, #2A1E1E 100%);
+      color: #E8D5B9;
+      font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      overflow-x: hidden;
+      margin: 0;
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+    .fade-in {
+      opacity: 0;
+      transform: translateY(40px);
+      animation: fadeIn 1.2s ease-out forwards;
+    }
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .music-card {
+      transition: transform 0.5s ease, box-shadow 0.5s ease;
+      background: rgba(74, 55, 40, 0.4);
+      backdrop-filter: blur(12px);
+      border: 1px solid #6B4E31;
+      border-radius: 16px;
+      overflow: hidden;
+      box-sizing: border-box;
+    }
+    .music-card:hover {
+      transform: translateY(-12px);
+      box-shadow: 0 16px 32px rgba(107, 78, 49, 0.4);
+    }
+    .music-card::before {
+      content: '';
+      position: absolute;
+      top: -100%;
+      left: -100%;
+      width: 300%;
+      height: 300%;
+      background: linear-gradient(
+        45deg,
+        transparent,
+        rgba(139, 69, 19, 0.3),
+        transparent
+      );
+      transform: rotate(45deg);
+      animation: shine 6s ease-in-out infinite;
+    }
+    @keyframes shine {
+      0% { transform: translate(-100%, -100%) rotate(45deg); }
+      100% { transform: translate(100%, 100%) rotate(45deg); }
+    }
+    .cta-button {
+      background: linear-gradient(45deg, #8B4513, #A0522D);
+      transition: all 0.4s ease;
+      border-radius: 50px;
+      padding: 12px 24px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(139, 69, 19, 0.3);
+    }
+    .cta-button:hover {
+      background: linear-gradient(45deg, #A0522D, #8B4513);
+      transform: scale(1.1);
+      box-shadow: 0 8px 20px rgba(139, 69, 19, 0.5);
+    }
+    .cta-button:focus {
+      outline: 2px solid #A0522D;
+      outline-offset: 2px;
+    }
+    .cta-button::before {
+      content: '';
+      position: absolute;
+      top: -100%;
+      left: -100%;
+      width: 300%;
+      height: 300%;
+      background: linear-gradient(
+        45deg,
+        transparent,
+        rgba(232, 213, 185, 0.2),
+        transparent
+      );
+      transform: rotate(45deg);
+      animation: shine 4s ease-in-out infinite;
+    }
+    .header-bg {
+      position: relative;
+      z-index: 1;
+      overflow: hidden;
+      background: url('https://source.unsplash.com/random/1920x1080/?music') no-repeat center;
+      background-size: cover;
+      min-height: 60vh;
+      display: flex;
+      align-items: center;
+    }
+    .header-bg::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(180deg, rgba(60, 47, 47, 0.8), rgba(42, 30, 30, 0.9));
+      z-index: -1;
+    }
+    .header-bg::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, #8B4513, #A0522D, #6B4E31, #4A3728);
+      opacity: 0.3;
+      animation: gradientShift 20s ease-in-out infinite;
+      z-index: -2;
+    }
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    .glass-effect {
+      background: rgba(74, 55, 40, 0.4);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(107, 78, 49, 0.3);
+      border-radius: 16px;
+      transition: all 0.4s ease;
+    }
+    .glass-effect:hover {
+      background: rgba(74, 55, 40, 0.5);
+      box-shadow: 0 8px 24px rgba(107, 78, 49, 0.2);
+    }
+    .highlight-text {
+      background: linear-gradient(90deg, #E8D5B9, #A0522D);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      font-weight: 800;
+    }
+    .song-title {
+      background: linear-gradient(90deg, #E8D5B9, #D4A017);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      font-weight: 600;
+    }
+    .social-icon, .sound-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: #6B4E31;
+      border-radius: 12px;
+      transition: transform 0.3s ease, background 0.3s ease;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3), inset 0 1px 1px rgba(232, 213, 185, 0.1);
+    }
+    .social-icon:hover, .sound-icon:hover {
+      background: #A0522D;
+      transform: scale(1.1);
+    }
+    .social-icon svg, .sound-icon svg {
+      width: 20px;
+      height: 20px;
+      fill: #E8D5B9;
+    }
+    .container {
+      max-width: 100%;
+      padding-left: 1rem;
+      padding-right: 1rem;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    @media (min-width: 640px) {
+      .container {
+        max-width: 640px;
+      }
+    }
+    @media (min-width: 768px) {
+      .container {
+        max-width: 768px;
+      }
+    }
+    @media (max-width: 576px) {
+      .header-bg {
+        min-height: 50vh;
+      }
+      h1 {
+        font-size: 2.5rem;
+      }
+      p {
+        font-size: 1rem;
+      }
+    }
+    .progress-bar {
+      background: #6B4E31;
+      height: 4px;
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .progress-bar-fill {
+      background: #A0522D;
+      height: 100%;
+      width: 0;
+      transition: width 0.1s linear;
+    }
+    .player-controls {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header Section -->
+  <header class="header-bg py-16 md:py-24 shadow-2xl">
+    <div class="container mx-auto text-center flex flex-col items-center px-6">
+      <h1 class="text-5xl md:text-6xl font-extrabold tracking-tight drop-shadow-2xl fade-in" style="animation-delay: 0.3s;">
+        <span class="highlight-text">Ethereal Rythms</span>
+      </h1>
+      <p class="mt-6 text-xl md:text-2xl font-semibold fade-in" style="animation-delay: 0.5s;">
+        Discover Soulful Nasheeds
+      </p>
+    </div>
+  </header>
+
+  <!-- Nasheeds Section -->
+  <section class="py-24 fade-in" style="animation-delay: 0.7s;">
+    <div class="container mx-auto px-6">
+      <h2 class="text-4xl md:text-5xl font-bold text-center mb-12">Featured Nasheeds</h2>
+      <div class="space-y-8">
+        <!-- Nasheed 1 -->
+        <div class="music-card p-6 glass-effect relative">
+          <h3 class="text-2xl font-semibold song-title mb-2">النبراس 4 - عبدالله الجارالله</h3>
+          <p class="text-[#E8D5B9] mb-4">Soulful nasheed with effects by Abdullah Aljarallah.</p>
+          <audio id="audio-1" src="https://github.com/mhmmdshadil/Ethereal-Rythm/raw/main/%D8%A7%D9%84%D9%86%D8%A8%D8%B1%D8%A7%D8%B3%204%20__%20%D8%B9%D8%A8%D8%AF%D8%A7%D9%84%D9%84%D9%87%20%D8%A7%D9%84%D8%AC%D8%A7%D8%B1%D8%A7%D9%84%D9%84%D9%87%20_%20%D9%85%D8%A4%D8%AB%D8%B1%D8%A7%D8%AA.mp3"></audio>
+          <div class="player-controls">
+            <button class="cta-button play-pause" data-audio="audio-1" aria-label="Play or pause nasheed 1">Play</button>
+            <div class="progress-bar flex-1">
+              <div class="progress-bar-fill" id="progress-1"></div>
+            </div>
+            <span class="sound-icon" aria-label="Volume control icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M11.5 3.5v17l-7-3.5V6.5l7-3.5zm-1 1.7l-4.5 2.3v7l4.5 2.3v-11.6zm5.5 2.8c2.2 0 4 1.8 4 4s-1.8 4-4 4v-2c1.1 0 2-.9 2-2s-.9-2-2-2v-2zm4-3v2c2.2 0 4 1.8 4 4s-1.8 4-4 4v2c3.3 0 6-2.7 6-6s-2.7-6-6-6z"/>
+              </svg>
+            </span>
+            <input type="range" class="volume-slider" value="1" min="0" max="1" step="0.01" aria-label="Volume control for nasheed 1">
+          </div>
+        </div>
+        <!-- Nasheed 2 -->
+        <div class="music-card p-6 glass-effect relative">
+          <h3 class="text-2xl font-semibold song-title mb-2">النبراس 3 - عبدالله الرفاعي</h3>
+          <p class="text-[#E8D5B9] mb-4">Inspiring nasheed with effects by Abdullah Alrafai.</p>
+          <audio id="audio-2" src="https://github.com/mhmmdshadil/Ethereal-Rythm/raw/main/%D8%A7%D9%84%D9%86%D8%A8%D8%B1%D8%A7%D8%B3%203%20__%20%D8%B9%D8%A8%D8%AF%D8%A7%D9%84%D9%84%D9%87%20%D8%A7%D9%84%D8%B1%D9%81%D8%A7%D8%B9%D9%8A%20_%20%D9%85%D8%A4%D8%AB%D8%B1%D8%A7%D8%AA.mp3"></audio>
+          <div class="player-controls">
+            <button class="cta-button play-pause" data-audio="audio-2" aria-label="Play or pause nasheed 2">Play</button>
+            <div class="progress-bar flex-1">
+              <div class="progress-bar-fill" id="progress-2"></div>
+            </div>
+            <span class="sound-icon" aria-label="Volume control icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M11.5 3.5v17l-7-3.5V6.5l7-3.5zm-1 1.7l-4.5 2.3v7l4.5 2.3v-11.6zm5.5 2.8c2.2 0 4 1.8 4 4s-1.8 4-4 4v-2c1.1 0 2-.9 2-2s-.9-2-2-2v-2zm4-3v2c2.2 0 4 1.8 4 4s-1.8 4-4 4v2c3.3 0 6-2.7 6-6s-2.7-6-6-6z"/>
+              </svg>
+            </span>
+            <input type="range" class="volume-slider" value="1" min="0" max="1" step="0.01" aria-label="Volume control for nasheed 2">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gradient-to-r from-[#3C2F2F] to-[#2A1E1E] text-[#E8D5B9] py-10">
+    <div class="container mx-auto text-center">
+      <p>© 2025 Ethereal Rythms. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Fade-in animations
+      const elements = document.querySelectorAll('.fade-in');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.animationPlayState = 'running';
+          }
+        });
+      }, { threshold: 0.2 });
+      elements.forEach(element => observer.observe(element));
+
+      // Audio player functionality
+      const players = document.querySelectorAll('.player-controls');
+      let currentAudio = null;
+
+      players.forEach(player => {
+        const audio = document.getElementById(player.querySelector('.play-pause').dataset.audio);
+        const playPauseBtn = player.querySelector('.play-pause');
+        const progressBar = player.querySelector('.progress-bar-fill');
+        const volumeSlider = player.querySelector('.volume-slider');
+
+        playPauseBtn.addEventListener('click', () => {
+          if (currentAudio && currentAudio !== audio) {
+            currentAudio.pause();
+            currentAudio.currentTime = 0;
+            const prevBtn = document.querySelector(`[data-audio="${currentAudio.id}"]`);
+            prevBtn.textContent = 'Play';
+          }
+
+          if (audio.paused) {
+            audio.play();
+            playPauseBtn.textContent = 'Pause';
+            currentAudio = audio;
+          } else {
+            audio.pause();
+            playPauseBtn.textContent = 'Play';
+            currentAudio = null;
+          }
+        });
+
+        audio.addEventListener('timeupdate', () => {
+          const progress = (audio.currentTime / audio.duration) * 100;
+          progressBar.style.width = `${progress}%`;
+        });
+
+        volumeSlider.addEventListener('input', () => {
+          audio.volume = volumeSlider.value;
+        });
+
+        audio.addEventListener('ended', () => {
+          playPauseBtn.textContent = 'Play';
+          progressBar.style.width = '0%';
+          currentAudio = null;
+        });
+      });
+    });
+  </script>
+</body>
+</html>
